@@ -18,8 +18,8 @@ export class AppController {
   }
 
   @Get('healthz')
-  getHealthState() {
-    const isHealth = this.appService.getIsHealthy();
+  async getHealthState() {
+    const isHealth = await this.appService.getIsHealthy();
 
     if (!isHealth) {
       throw new BadGatewayException('not ok');

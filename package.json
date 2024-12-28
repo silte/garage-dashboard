@@ -12,6 +12,7 @@
     "start:frontend": "npm -w frontend run dev",
     "lint": "npm -ws run lint",
     "format": "npm -ws run format",
+    "check-types": "npm run -ws check-types",
     "test": "CI=true npm -w backend run test && CI=true npm -w frontend run test",
     "build": "./bin/buildApp"
   },

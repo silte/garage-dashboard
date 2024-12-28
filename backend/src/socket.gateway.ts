@@ -13,7 +13,7 @@ import { Server, Socket } from 'socket.io';
 export class SocketGateway implements OnGatewayConnection {
   private readonly logger = new Logger(SocketGateway.name);
 
-  private cacheData: any = {
+  private cacheData: unknown = {
     isGarageDoorClosed: null,
     garageTemperature: null,
     outsideTemperature: null,
@@ -22,12 +22,12 @@ export class SocketGateway implements OnGatewayConnection {
   @WebSocketServer()
   server: Server;
 
-  handleConnection(client: Socket, ...args: any[]) {
+  handleConnection(client: Socket) {
     this.logger.debug('websocket client connected');
     client.emit('update', this.cacheData);
   }
 
-  broadcastUpdate(payload: any) {
+  broadcastUpdate(payload: unknown) {
     this.cacheData = payload;
     this.server.emit('update', payload);
   }

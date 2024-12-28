@@ -14,9 +14,9 @@ export class HassioConnectorService {
 
   private isMessageListenerActive = false;
 
-  private healthCheckPromise: Promise<boolean>;
+  private healthCheckPromise: Promise<boolean> | null = null;
 
-  private resolveHealthCheckPromise: () => void;
+  private resolveHealthCheckPromise: () => void | null = null;
 
   private previousId = 0;
 
@@ -33,7 +33,7 @@ export class HassioConnectorService {
     });
   }
 
-  subscribeMessageListener(pushUpdate: (data: any) => void) {
+  subscribeMessageListener(pushUpdate: (data: unknown) => void) {
     if (this.isMessageListenerActive) return;
 
     this.isMessageListenerActive = true;
@@ -47,7 +47,7 @@ export class HassioConnectorService {
   }
 
   async healthCheck() {
-    if (this.healthCheckPromise) {
+    if (this.healthCheckPromise !== null) {
       return this.healthCheckPromise;
     }
 
@@ -67,8 +67,7 @@ export class HassioConnectorService {
   }
 
   private messageHandler(message: WebSocket.RawData) {
-    const data = JSON.parse(message.toString()) as { type: string } & unknown;
-    // this.logger.verbose(message.toString());
+    const data = JSON.parse(message.toString()) as { type: string };
 
     switch (data.type) {
       case 'auth_required':
@@ -120,6 +119,7 @@ export class HassioConnectorService {
     );
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private handleEventUpdate(response: any) {
     const entityId = response?.event?.data?.entity_id;
     const newEntityState = response?.event?.data?.new_state?.state;
@@ -142,6 +142,7 @@ export class HassioConnectorService {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private handlePreFetchedStates(response: any) {
     response.result?.forEach(({ entity_id, state }) => {
       switch (entity_id) {

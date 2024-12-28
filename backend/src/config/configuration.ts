@@ -13,7 +13,7 @@ export const configuration = () => ({
 type Flatten<T extends object> = {
   [K in keyof T as T[K] extends object
     ? never
-    : // eslint-disable @typescript-eslint/ban-types
+    : // eslint-disable-next-line @typescript-eslint/ban-types
     T[K] extends Function
     ? never
     : K]: T[K];
