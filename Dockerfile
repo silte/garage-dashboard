@@ -24,7 +24,7 @@ COPY --from=builder /app/node_modules /app/node_modules
 # Add a script to replace the placeholder with the BASE_PATH value
 RUN echo '#!/bin/sh' > /app/start.sh && \
     echo 'BASE_PATH=${BASE_PATH:-/}' >> /app/start.sh && \
-    echo 'sed -i "s|/base-path-placeholder|$BASE_PATH|g" $(grep -rl "/base-path-placeholder" /app)"' >> /app/start.sh && \
+    echo 'sed -i "s|/base-path-placeholder|$BASE_PATH|g" $(grep -rl "/base-path-placeholder" /app)' >> /app/start.sh && \
     echo 'node /app/server/main.js' >> /app/start.sh && \
     chmod +x /app/start.sh
 
