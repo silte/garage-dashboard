@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app.module';
 
-const port = 4000; // default port to listen
+const port = process.env.PORT ?? 4000; // default port to listen
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
