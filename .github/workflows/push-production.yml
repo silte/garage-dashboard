@@ -1,0 +1,77 @@
+name: Validate and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ci-build_${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: silte/actions/prepare-node-job@v1
+
+  lint:
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - uses: silte/actions/prepare-node-job@v1
+
+      - name: Eslint
+        run: npm run lint
+
+  lint-type:
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - uses: silte/actions/prepare-node-job@v1
+
+      - name: Lint TS types
+        run: npm run check-types
+
+  # test-frontend:
+  #   runs-on: ubuntu-latest
+  #   needs: install
+  #   steps:
+  #     - uses: silte/actions/prepare-node-job@v1
+
+  #     - uses: silte/actions/test-jest@v1
+  #       with:
+  #         PACKAGE_ROOT: "frontend"
+
+  # test-backend:
+  #   runs-on: ubuntu-latest
+  #   needs: install
+  #   steps:
+  #     - uses: silte/actions/prepare-node-job@v1
+
+  #     - uses: silte/actions/test-jest@v1
+  #       with:
+  #         PACKAGE_ROOT: "backend"
+
+  # docker-build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: silte/actions/build-docker-image@v1
+  #       with:
+  #         REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+
+  docker-publish:
+    needs:
+      # - docker-build
+      - lint
+      - lint-type
+      # - test-frontend
+      # - test-backend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: silte/actions/build-docker-image@v1
+        with:
+          DOCKER_REGISTRY: "ghcr.io/silte"
+          DOCKER_REPOSITORY: "garage-dashboard"
+          DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
+          DOCKER_REGISTRY_PASSWORD: ${{ secrets.REGISTRY_TOKEN }}
