@@ -1,5 +1,6 @@
 # Ignore node_modules
 node_modules
+*/node_modules
 
 # Ignore logs
 logs
@@ -18,6 +19,11 @@ yarn-error.log*
 # Ignore build output
 dist
 build
+*/dist
+*/build
+frontend/.next
+tsconfig.tsbuildinfo
+*/tsconfig.tsbuildinfo
 
 # Ignore coverage directory
 coverage
@@ -25,6 +31,7 @@ coverage
 # Ignore npm and yarn directories
 npm
 yarn
+.nvmrc
 
 # Ignore temporary files
 *.swp
@@ -36,3 +43,10 @@ yarn
 # Ignore Docker files
 Dockerfile
 docker-compose.yml
+
+# Ignore Helm files
+helm/*
+
+# Ignore readme
+README.md
+
