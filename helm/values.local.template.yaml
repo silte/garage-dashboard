@@ -1,0 +1,21 @@
+ingress:
+  enabled: true
+  host:
+  # Path is string or list of strings
+  path: /base-path
+
+healthCheck:
+  path: /base-path/healthz
+
+k8sProbes:
+  startup:
+    path: /base-path/readyz
+
+env:
+  basePath: /base-path
+  hassioUrl:
+  garage:
+    door:
+    temperature:
+  outside:
+    temperature:

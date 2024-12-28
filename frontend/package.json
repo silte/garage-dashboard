@@ -1,0 +1,39 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "next lint -- --fix"
+  },
+  "dependencies": {
+    "@silte/react-loader": "^1.0.4",
+    "@types/node": "20.4.7",
+    "@types/react": "18.2.18",
+    "@types/react-dom": "18.2.7",
+    "autoprefixer": "10.4.14",
+    "eslint-config-next": "13.4.12",
+    "next": "13.4.12",
+    "next-pwa": "^5.6.0",
+    "postcss": "8.4.27",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "socket.io-client": "^4.7.2",
+    "tailwindcss": "3.3.3",
+    "typescript": "4.9.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.46.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-config-prettier": "^8.10.0",
+    "eslint-plugin-import": "^2.28.0",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.1",
+    "eslint-plugin-react-hooks": "^4.6.0"
+  }
+}

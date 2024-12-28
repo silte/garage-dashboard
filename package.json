@@ -1,0 +1,23 @@
+{
+  "name": "financer",
+  "version": "1.0.0",
+  "description": "",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "start": "run-p start:backend start:frontend",
+    "start:backend": "npm -w backend run start:dev",
+    "start:frontend": "npm -w frontend run dev",
+    "lint": "npm -ws run lint",
+    "format": "npm -ws run format",
+    "test": "CI=true npm -w backend run test && CI=true npm -w frontend run test",
+    "build": "./bin/buildApp"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}

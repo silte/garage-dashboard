@@ -1,0 +1,8 @@
+node_modules
+docker/.env.production
+.vscode
+build
+
+*-old
+
+helm/values.local.yaml
