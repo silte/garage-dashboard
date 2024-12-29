@@ -13,13 +13,13 @@ jobs:
   install:
     runs-on: ubuntu-latest
     steps:
-      - uses: silte/actions/prepare-node-job@v1
+      - uses: silte/actions/prepare-node-job@v2
 
   lint:
     runs-on: ubuntu-latest
     needs: install
     steps:
-      - uses: silte/actions/prepare-node-job@v1
+      - uses: silte/actions/prepare-node-job@v2
 
       - name: Eslint
         run: npm run lint
@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: install
     steps:
-      - uses: silte/actions/prepare-node-job@v1
+      - uses: silte/actions/prepare-node-job@v2
 
       - name: Lint TS types
         run: npm run check-types
@@ -37,9 +37,9 @@ jobs:
   #   runs-on: ubuntu-latest
   #   needs: install
   #   steps:
-  #     - uses: silte/actions/prepare-node-job@v1
+  #     - uses: silte/actions/prepare-node-job@v2
 
-  #     - uses: silte/actions/test-jest@v1
+  #     - uses: silte/actions/test-jest@v2
   #       with:
   #         PACKAGE_ROOT: "frontend"
 
@@ -47,16 +47,16 @@ jobs:
   #   runs-on: ubuntu-latest
   #   needs: install
   #   steps:
-  #     - uses: silte/actions/prepare-node-job@v1
+  #     - uses: silte/actions/prepare-node-job@v2
 
-  #     - uses: silte/actions/test-jest@v1
+  #     - uses: silte/actions/test-jest@v2
   #       with:
   #         PACKAGE_ROOT: "backend"
 
   # docker-build:
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - uses: silte/actions/build-docker-image@v1
+  #     - uses: silte/actions/build-docker-image@v2
   #       with:
   #         REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
 
@@ -67,11 +67,10 @@ jobs:
       - lint-type
       # - test-frontend
       # - test-backend
-    runs-on: ubuntu-latest
-    steps:
-      - uses: silte/actions/build-docker-image@v1
-        with:
-          DOCKER_REGISTRY: "ghcr.io/silte"
-          DOCKER_REPOSITORY: "garage-dashboard"
-          DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
-          DOCKER_REGISTRY_PASSWORD: ${{ secrets.REGISTRY_TOKEN }}
+    uses: silte/actions/.github/workflows/build-docker-image.yml@v2
+    with:
+      DOCKER_REGISTRY: "ghcr.io/silte"
+      DOCKER_REPOSITORY: "garage-dashboard"
+      DOCKER_REGISTRY_USERNAME: ${{ github.repository_owner }}
+    secrets:
+      DOCKER_REGISTRY_PASSWORD: ${{ secrets.REGISTRY_TOKEN }}

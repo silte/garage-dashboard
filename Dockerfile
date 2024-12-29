@@ -1,6 +1,6 @@
 FROM node:20.5.0-alpine AS builder
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 RUN apk add --update --no-cache g++ make python3 && ln -sf python3 /usr/bin/python
 
 COPY . /app
@@ -15,7 +15,7 @@ RUN npm ci --quiet --include=dev && \
 
 FROM node:20.5.0-alpine
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 WORKDIR /app
 COPY --from=builder /app/build /app
