@@ -49,6 +49,7 @@ yarn
 # Ignore Docker files
 Dockerfile
 docker-compose.yml
+.dockerignore
 
 # Ignore Helm files
 helm/*
@@ -56,3 +57,16 @@ helm/*
 # Ignore readme
 README.md
 
+# Ignore git files
+.git
+.gitignore
+*/.gitignore
+
+# Ignore IDE files
+.idea
+.vscode
+*/.vscode
+
+# Ignore Github files
+.github
+*/.github
