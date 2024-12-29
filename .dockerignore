@@ -52,10 +52,11 @@ docker-compose.yml
 .dockerignore
 
 # Ignore Helm files
-helm/*
+helm
 
 # Ignore readme
 README.md
+*/README.md
 
 # Ignore git files
 .git
@@ -70,3 +71,11 @@ README.md
 # Ignore Github files
 .github
 */.github
+
+# Project files
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+sonar-project.properties
+*/sonar-project.properties
+.sonarlint
+*/.sonarlint
